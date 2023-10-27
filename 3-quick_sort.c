@@ -13,9 +13,9 @@ void swap(int *a, int *b);
 void quick_sort(int *array, size_t size)
 {
 	/*check validity of inputs */
-	if (!array || size <= 0)
+	if (!array || size < 2)
 		return;
-	quick_sort_recursive(array, 0, size, size);
+	quick_sort_recursive(array, 0, size - 1, size);
 }
 /**
 * partition - rearange elments of array
