@@ -12,6 +12,10 @@ void shell_sort(int *array, size_t size)
 	size_t gap = 1, i, j;
 	int newElem;
 
+	/*check validity of data*/
+	if (!array || size <= 0)
+		return;
+
 	/* calculate the Knuth sequence*/
 	while (gap  <= size / 3)
 	{
