@@ -54,7 +54,7 @@ void _hoareSort(int *array, size_t size, int left, int right)
 /**
  * swap - exchange values of two variables
  * @a: pointer to first varaible
- * @second: pointer to Second variable
+ * @b: pointer to Second variable
  * Return: void
  */
 void swap(int *a, int *b)
