@@ -36,18 +36,19 @@ void swap(int *a, int *b)
 void bitonicMerge(int *array, size_t size, size_t start, size_t count,
 		char dir)
 {
-	size_t i, freq = dir / 2;
+	size_t i, k;
 
 	if (count > 1)
 	{
-		for (i = start; i < start + freq; i++)
+		k = count / 2;
+		for (i = start; i < start + k; i++)
 		{
-			if ((dir == UP && array[i] > array[i + freq]) ||
-			    (dir == DOWN && array[i] < array[i + freq]))
-				swap(array + i, array + i + freq);
+			if ((dir == UP && array[i] > array[i + k]) ||
+			    (dir == DOWN && array[i] < array[i + k]))
+				swap(array + i, array + i + k);
 		}
-		bitonicMerge(array, size, start, freq, dir);
-		bitonicMerge(array, size, start + freq, freq, dir);
+		bitonicMerge(array, size, start, k, dir);
+		bitonicMerge(array, size, start + k, k, dir);
 	}
 }
 
@@ -63,18 +64,23 @@ void bitonicMerge(int *array, size_t size, size_t start, size_t count,
  */
 void bitonicSort(int *array, size_t size, size_t start, size_t count, char dir)
 {
-	size_t cut = count / 2;
+	size_t k;
 	char *str = (dir == UP) ? "UP" : "DOWN";
 
 	if (count > 1)
 	{
+		k = count / 2;
+
 		printf("Merging [%lu/%lu] (%s):\n", count, size, str);
 		print_array(array + start, count);
+		/*ascending order , dir = 1*/
+		bitonicSort(array, size, start, k, UP);
 
-		bitonicSort(array, size, start, cut, UP);
-		bitonicSort(array, size, start + cut, cut, DOWN);
+		/* desecnding order , dir = 0*/
+		bitonicSort(array, size, start + k, k, DOWN);
+
+		/*merge whole sequence in ascending order*/
 		bitonicMerge(array, size, start, count, dir);
-
 		printf("Result [%lu/%lu] (%s):\n", count, size, str);
 		print_array(array + start, count);
 	}
