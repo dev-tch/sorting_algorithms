@@ -13,7 +13,7 @@ void shell_sort(int *array, size_t size)
 	int newElem;
 
 	/*check validity of data*/
-	if (!array || size <= 0)
+	if (!array || size < 1)
 		return;
 
 	/* calculate the Knuth sequence*/
